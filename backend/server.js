@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
+
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const roadmapRoutes = require('./routes/roadmapRoutes');
@@ -11,11 +12,21 @@ const mentorRoutes = require('./routes/mentorRoutes');
 const interviewRoutes = require('./routes/interviewRoutes');
 const skillGapRoutes = require('./routes/skillGapRoutes');
 
-
 const app = express();
 
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'https://skillbridge-ai-1-wuat.onrender.com',
+    'http://localhost:5173'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Database connection
